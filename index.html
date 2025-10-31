@@ -137,9 +137,9 @@
       </div>
       <br>
       <h2 class="subtitle has-text-centered">
-        Monte Carlo Tree Diffusion (MCTD) shows promising results in the complex planning tasks by integrating diffusion models with structured tree search.
-        However, its efficacy is limited by the training trajectory lengths due to the limitation of diffusion model's ability to generate longer trajectories than the training data.
-        We propose Compositional Monte Carlo Tree Diffusion (C-MCTD), a framework that compositionally generates plans from individual trajectory generation with global coherence.
+        Monte Carlo Tree Diffusion (MCTD) effectively tackles complex planning tasks by combining diffusion models with structured tree search.
+        However, its core limitation is the inability to generate these high-quality plans for longer trajectories than seen during training.
+        We propose Compositional MCTD (C-MCTD), a framework that overcomes this by generating a globally coherent plan from smaller, individually generated trajectory segments.
       </h2>
     </div>
   </div>
@@ -171,25 +171,49 @@
         <h2 class="title is-3">Preliminary: Monte Carlo Tree Diffusion (MCTD)</h2>
         <div class="content has-text-justified">
           <p>
-
-
-
-
-            MCTD shows promising results in complex planning tasks by combining tree-structured search (Monte Carlo Tree Search) with diffusion denoising. However, it suffers from inherent computational inefficiency due to the intensive nature of both components.
-            The computational bottlenecks arise from two sources: MCTS fundamentally requires sequential statistics updates after each rollout, preventing parallelization, while the diffusion model demands iterative execution of expensive denoising steps at each node.
-            This overhead becomes particularly problematic in long-horizon tasks—precisely where MCTD excels. As planning horizon increases, MCTD must navigate exponentially expanding search space, leading to prohibitive computational costs.
-            Consider an MCTD tree where each parent has $N_{\text{child}}$ children and $C_{\text{sub}}$ represents the denoising cost per node. For required task depth $\bar{s}$, the total search complexity is:
+            Our work builds upon <strong><a href="https://jaesikyoon.com/mctd-page/" target="_blank">Monte Carlo Tree Diffusion (MCTD)</a></strong>, a framework that reframes trajectory planning as a tree search problem by integrating the generative power of diffusion models with the structured search capabilities of MCTS.
+            The framework is built on three key concepts:
+          </p>
+          <p>
+            <strong>1. Denoising as Tree Rollout</strong><br>
+            Unlike conventional MCTS which performs rollouts at the state level, MCTD operates on <strong>subplans</strong>—segments of the full trajectory. A complete trajectory $\mathbf{x}$ is partitioned into a sequence $[\mathbf{x}_1, \dots, \mathbf{x}_S]$.
+            By generating these semi-autoregressively, MCTD performs intermediate evaluations akin to MCTS rollouts.
+            This approach effectively reduces the search tree's depth while preserving the global coherence of diffusion models.
             $$
-            C_{\text{MCTD}} = O(N_{\text{child}}^{\bar{s}} \cdot C_{\text{sub}}).
+              \begin{align}
+                p(\mathbf{x}) \approx \prod_{s=1}^S p(\mathbf{x}_s|\mathbf{x}_{1:s-1})
+              \end{align}
             $$
-            While MCTD's exploration-exploitation balancing reduces actual complexity below this bound, the algorithm remains exponential in planning horizon. This creates the <strong>Planning Horizon Dilemma</strong>: MCTD becomes increasingly inefficient precisely where it is most effective—long-horizon planning tasks requiring extensive search depth.
+          </p>
+          <p>
+              <strong>2. Guidance Levels as Meta-Actions</strong><br>
+              To manage the exploration-exploitation trade-off, MCTD introduces <strong>guidance levels</strong> as meta-actions. For each subplan $\mathbf{x}_s$, a discrete control mode—such as $\text{GUIDE}$ or $\text{NO_GUIDE}$—is selected.
+              By dynamically controlling the guidance level $g_s$ for each subplan, MCTD can balance exploration and exploitation within a single, unified denoising process.
+              $$
+                \begin{align}
+                  p(\mathbf{x}|\mathbf{g}) \approx \prod_{s=1}^S p(\mathbf{x}_s|\mathbf{x}_{1:s-1}, g_s)
+                \end{align}
+              $$
+          </p>
+          <p>
+              <strong>3. Jumpy Denoising as Fast Simulation</strong><br>
+              For efficient simulation, MCTD utilizes a fast, <strong>jumpy denoising</strong> process based on the Denoising Diffusion Implicit Model (DDIM) (<a href="https://arxiv.org/abs/2010.02502" target="_blank">Song et al., 2020</a>).
+              This technique significantly accelerates the search process while maintaining high-quality trajectory generation for evaluation.
+              $$
+                \begin{align}
+                  \tilde{\mathbf{x}}_{s+1:S} \sim p(\mathbf{x}_{s+1:S}|\mathbf{x}_{1:s}, \mathbf{g})
+                \end{align}
+              $$
+          </p>
+          <p>
+              <strong>Four Canonical Steps of MCTD</strong><br>
+              MCTD implements these components through a modified MCTS procedure. The four canonical steps—Selection, Expansion, Simulation, and Backpropagation—are adapted to handle subplan generation within this diffusion-based planning process.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End planning horizon dilemma -->
 
 <!-- Fast-MCTD -->
 <section class="section hero is-light">
