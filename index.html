@@ -308,7 +308,7 @@
             To tackle this exponential complexity, we developed the <strong>Distributed Composer (DC)</strong>.
           </p>
           <p>
-            The core idea is to "divide and conquer".
+            The core idea is to "divide and conquer."
             Instead of launching one long search from a single start, DC initiates multiple, smaller MCTS searches in parallel from several strategic starting positions (waypoints) within the environment.
             These parallel searches explore their local areas and then connect with each other to form a global solution.
           </p>
@@ -348,11 +348,44 @@
             To address this, we introduce our final and most efficient variant: <strong>Preplan Composer (PC)</strong>.
           </p>
         </div>
+        <!-- Distributed Composer -->
+        <h3 class="title is-4">Preplan Composer (PC)</h3>
+        <div class="content has-text-justified">
+          <p>
+            Our final variant, the <strong>Preplan Composer (PC)</strong>, addresses the last major hurdle: the heavy computational cost of performing tree searches at inference time.
+            While the Distributed Composer parallelizes the search, it still has to do all that work "live."
+            PC introduces a simple yet powerful idea: what if we do all the heavy exploration work <em>beforehand</em>?
+          </p>
+          <p>
+            PC shifts the expensive process of discovering paths into an offline, one-time pre-computation step. This allows for nearly instantaneous planning when a new task is given. It operates in two distinct phases.
+          </p>
+          <p>
+            <strong>Phase 1 (Offline): Building the Connectivity Graph</strong><br>
+            In the offline phase, we use our Online Composer to thoroughly explore the environment and build a comprehensive "roadmap" between the waypoints.
+            This roadmap is stored as a graph where the nodes are strategic waypoints and the edges are high-quality, pre-computed plans that connect them.
+            <em>This computationally intensive step only needs to be performed once.</em>
+            $$
+              \begin{align}
+                \tilde{p}_{\theta}(\mathbf{x}|s_i) \propto p_{\theta}(\mathbf{x}|s_i) \exp(-\text{dist}(\mathbf{x},s_j)),
+              \end{align}
+            $$
+          </p>
+          <p>
+            <strong>Phase 2 (Online): Lightning-Fast Graph-Based Planning</strong><br>
+            Once a planning task is requested at inference time, the hard work is already done.
+            PC simply connects the given start and goal states to their nearest waypoints in the pre-computed graph.
+            Then, it uses a classical shortest-path finding algorithm (like A*) to find the optimal path along the existing roadmap.
+            <em>No complex tree search is required at inference time.</em>
+          </p>
+          <p>
+            By pre-computing the solution space, PC makes long-horizon planning incredibly efficient at inference time, making it ideal for applications where speed is critical.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End Fast-MCTD -->
+<!-- End C-MCTD -->
 
 <!-- Experiment results -->
 <section class="section hero is-light">
