@@ -294,23 +294,59 @@
             While OC effectively extends planning beyond the limits of its training data, its sequential, piece-by-piece approach can become slow in extremely large environments due to the exponential growth of the search space.
             To address these scalability challenges, we developed our next two variants: <strong>Distributed Composer (DC)</strong> and <strong>Preplan Composer (PC)</strong>.
           </p>
+        </div>
         <!-- Distributed Composer -->
-        <h3 class="title is-4">Sparse MCTD</h3>
+        <h3 class="title is-4">Distributed Composer (DC)</h3>
         <div class="content has-text-justified">
           <p>
             <div style="text-align: center;">
-              <img src="static/images/smctd_overview.png" alt="Sparse MCTD Overview" style="width: 90%; height: auto;">
+              <img src="static/images/dc_overview.png" alt="Distributed /Preplan Composer Algorithms" style="width: 90%; height: auto;">
             </div>
             <br>
-            Through the parallelization of the tree search, we can optimize the overhead on the sequential search. However, another fundamental inefficiency of MCTD is the iterative denoising process of diffusion model, which is computationally intensive.
-            To address this, we proposed the Sparse MCTD (S-MCTD), which reduces the rollout length through trajectory coarsening, $\mathbf{x}'=[x_1, x_{H+1}, x_{2H+1}, $$\dots]$ where $H$ is the coarsening factor.
-            Similar to the parallelism degree, too much coarsening can cause the information loss, we empirically found the optimal coarsening factor $H=5$.
-            Interestingly, this coarsening process is not just improving the efficiency on denoising, but also reducing the search space by reducing the number of subplans as:
+          </p>
+          <p>
+            While the Online Composer is effective, its single, sequential search can become prohibitively slow in vast, long-horizon planning tasks.
+            To tackle this exponential complexity, we developed the <strong>Distributed Composer (DC)</strong>.
+          </p>
+          <p>
+            The core idea is to "divide and conquer".
+            Instead of launching one long search from a single start, DC initiates multiple, smaller MCTS searches in parallel from several strategic starting positions (waypoints) within the environment.
+            These parallel searches explore their local areas and then connect with each other to form a global solution.
+          </p>
+          <p>
+            <strong>Guidance-Oriented Parallel Search</strong><br>
+            To make these parallel searches efficient, we guide each one toward task-relevant objectives $\mathcal{J}_{\phi}(\mathbf{x})$, each search tree from a starting position $s_i$ is biased to expand in promising directions.
+            This ensures that computational effort is focused on explorations that are most likely to contribute to a successful final plan, avoiding wasted effort.
             $$
-            C_{\text{S-MCTD}} = \mathcal{O}\left(N_{\text{child}}^{S/H} \cdot C_{\text{coarse}}\right),
+            \begin{align}
+              \tilde{p}_{\theta}(\mathbf{x}|s_i) \propto p_{\theta}(\mathbf{x}|s_i) \exp(\mathcal{J}_{\phi}(\mathbf{x})),
+            \end{align}
             $$
-            where $C_{\text{coarse}}$ is the denoising cost of the coarse trajectory.
-            We observe that computational efficiency improves exponentially with the interval size $H$.
+          </p>
+          <p>
+            <strong>Strategic Tree Connection</strong><br>
+            To connect the parallel searches, DC uses a strategy to connect the trees only when the plan from one tree reaches the starting point of another tree.
+            This transforms the problem into building a "roadmap" between key waypoints, dramatically reducing computational overhead.
+            $$
+            \begin{align}
+              \text{Connect}(\mathcal{T}_i, \mathcal{T}_j) = 
+              \begin{cases}
+                  \text{True}, & \text{if } \exists~v \in \mathcal{T}_i : \min_{p \in v.\text{trajectory}} \text{dist}(p, s_j) < \epsilon \\
+                  \text{False}, & \text{otherwise}
+              \end{cases}
+            \end{align}
+            $$
+          </p>
+          <p>
+            <strong>Efficient Path Synthesis</strong><br>
+            Once the parallel searches have run and formed a connectivity graph (our "roadmap"), DC uses a classic shortest-path algorithm like Dijkstra's or A* to instantly find the optimal path from the start to the goal.
+            This final step synthesizes the local plans discovered by the parallel searches into a single, globally optimal solution.
+          </p>
+          <p>
+            <strong>Remaining Challenges</strong><br>
+            By parallelizing the search, DC significantly reduces the search depth and scales far better than OC.
+            However, it still performs all of this computationally intensive tree search at inference time.
+            To address this, we introduce our final and most efficient variant: <strong>Preplan Composer (PC)</strong>.
           </p>
         </div>
       </div>
