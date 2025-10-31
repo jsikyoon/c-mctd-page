@@ -64,7 +64,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Fast Monte Carlo Tree Diffusion: 100x Speedup via Parallel Sparse Planning</h1>
+            <h1 class="title is-1 publication-title">Compositional Monte Carlo Tree Diffusion for Extendable Planning</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
@@ -109,14 +109,14 @@
                     </a>
                   </span>
 
-                  <!-- Arxiv PDF link -->
+                  <!-- MCTD Page link -->
                   <span class="link-block">
-                    <a href="https://arxiv.org/pdf/2502.07202" target="_blank"
+                    <a href="https://jaesikyoon.com/mctd-page/" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
+                      <i class="fas fa-link"></i>
                     </span>
-                    <span>MCTD Paper</span>
+                    <span>MCTD Page</span>
                     </a>
                   </span>
 
@@ -153,7 +153,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Diffusion models have recently emerged as a powerful approach for trajectory planning. However, their inherently non-sequential nature limits their effectiveness in long-horizon reasoning tasks at test time. The recently proposed Monte Carlo Tree Diffusion (MCTD) offers a promising solution by combining diffusion with tree-based search, achieving state-of-the-art performance on complex planning problems. Despite its strengths, our analysis shows that MCTD incurs substantial computational overhead due to the sequential nature of tree search and the cost of iterative denoising. To address this, we propose Fast-MCTD, a more efficient variant that preserves the strengths of MCTD while significantly improving its speed and scalability. Fast-MCTD integrates two techniques: Parallel MCTD, which enables parallel rollouts via delayed tree updates and redundancy-aware selection; and Sparse MCTD, which reduces rollout length through trajectory coarsening. Experiments show that Fast-MCTD achieves up to 100× speedup over standard MCTD while maintaining or improving planning performance. Remarkably, it even outperforms Diffuser in inference speed on some tasks, despite Diffuser requiring no search and yielding weaker solutions. These results position Fast-MCTD as a practical and scalable solution for diffusion-based inference-time reasoning.
+            Monte Carlo Tree Diffusion (MCTD) integrates diffusion models with structured tree search to enable effective trajectory exploration through stepwise reasoning. However, MCTD remains fundamentally limited by training trajectory lengths. While periodic replanning allows plan concatenation for longer plan generation, the planning process remains locally confined, as MCTD searches within individual trajectories without access to global context. We propose Compositional Monte Carlo Tree Diffusion (C-MCTD), a framework that elevates planning from individual trajectory optimization to reasoning over complete plan compositions. C-MCTD introduces three complementary components: (1) Online Composer, which performs globally-aware planning by searching across entire plan compositions; (2) Distributed Composer, which reduces search complexity through parallel exploration from multiple starting points; and (3) Preplan Composer, which accelerates inference by leveraging cached plan graphs.
           </p>
         </div>
       </div>
@@ -162,14 +162,18 @@
 </section>
 <!-- End paper abstract -->
 
-<!-- planning horizon dilemma -->
+<!-- MCTD -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Planning Horizon Dilemma</h2>
+        <h2 class="title is-3">Preliminary: Monte Carlo Tree Diffusion (MCTD)</h2>
         <div class="content has-text-justified">
           <p>
+
+
+
+
             MCTD shows promising results in complex planning tasks by combining tree-structured search (Monte Carlo Tree Search) with diffusion denoising. However, it suffers from inherent computational inefficiency due to the intensive nature of both components.
             The computational bottlenecks arise from two sources: MCTS fundamentally requires sequential statistics updates after each rollout, preventing parallelization, while the diffusion model demands iterative execution of expensive denoising steps at each node.
             This overhead becomes particularly problematic in long-horizon tasks—precisely where MCTD excels. As planning horizon increases, MCTD must navigate exponentially expanding search space, leading to prohibitive computational costs.
