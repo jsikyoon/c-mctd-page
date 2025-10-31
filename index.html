@@ -395,47 +395,26 @@
         <h2 class="title is-3">Experimental Results</h2>
         <div class="content has-text-justified">
           <p>
-            We evaluate the performance of Fast-MCTD on a variety of tasks, including long-horizon maze, robot arm manipulation, and partially observable & visual long-horizon maze tasks.
-            While MCTD shows better performance than other baselines, the required time to generate plans from MCTD is generally much longer than other baselines.
-            On the other hand, Fast-MCTD shows comparable performances to MCTD while achieving huge speedups.
-            For instance, for PointMaze and AntMaze Giant tasks, Fast-MCTD achieves 100x and 80x speedup over MCTD while maintaining the similar performance.
-            <br>
-            <br>
-            Especially, on Visual Maze large tasks, Fast-MCTD outperforms MCTD through the higher-level planning by improving the long-term planning generation quality.
-            <br>
-            <br>
-            <img src="static/images/maze-results.png" alt="Experiment Results" style="width: 100%; height: auto;">
-            <br>
-            <img src="static/images/cube-results.png" alt="Experiment Results" style="width: 100%; height: auto;">
-            <br>
-            <img src="static/images/vmaze-results.png" alt="Experiment Results" style="width: 100%; height: auto;">
-            <br>
+            To demonstrate the effectiveness of C-MCTD, we conducted a comprehensive evaluation using challenging benchmarks from OGBench as done in the original MCTD paper.
+            Our experiments cover three key domains: <strong>(1) long-horizon maze navigation</strong>, <strong>(2) multi-object robot arm manipulation</strong>, and <strong>(3) high-dimensional visual navigation</strong>.
           </p>
         </div>
-        <h3 class="title is-4">Ablation Study</h3>
+        <hr><h3 class="title is-3">Long-Horizon Maze Navigation 🗺️</h3>
         <div class="content has-text-justified">
-          <p>
-            We conducted an ablation study to understand the contribution of each component of Fast-MCTD.
-            <br>
-            <br>
-            <figure style="text-align: center;">
-              <img src="static/images/ras_ablation.png" alt="Ablation Study" style="width: 100%; height: auto;">
-              <figcaption style="margin-top: 8px; font-size: 1em; color: #555;">Ablation Study on Redundancy-Aware Selection</figcaption>
-            </figure>
-            The redundancy awareness (sequential selection) ablation study is shown in Table 5, we can see that the redundancy awareness is important to improve the efficiency on the long-horizon planning tasks.
-            For the hyperparameter $w$ on our modified node selection policy, we found that if $w$ is not $0$ (considering the other concurrent rollouts), it's effect on the model performance is not significant. 
-            <br>
-            <br>
-            <figure style="text-align: center;">
-              <img src="static/images/parallelism_jump_ablation.png" alt="Ablation Study" style="width: 100%; height: auto;">
-              <figcaption style="margin-top: 8px; font-size: 1em; color: #555;">Ablation Study on Parallelism Degree and Higher-Level Interval</figcaption>
-            </figure>
-            We took another ablation studies on the parallelism degree and higher-level abstraction interval.
-            For parallelism degree, we found that the efficiency is dramatically improved when it is increased from $1$.
-            When it is very high (e.g., 200), the performance is slightly degraded, but it is not significant, which means the overhead on searching from the old tree statistics is minor compared to the benefit from the parallelism.
-            For the higher-level abstraction interval, we found the performance is drastically decreased when the interval is too large (e.g., 30), while the efficiency is saturated at 10.
-            It is because the information loss of the coarse trajectory is too large to generate the good subplans.
-          </p>
+            <p>
+                First, we tested our methods on maze navigation tasks that require planning trajectories far longer than those seen during training.
+                This experiment highlights how well C-MCTD generalizes beyond its training data.
+            </p>
+            <div class="has-text-centered">
+              <img src="static/images/maze_navigation_results.png" alt="Maze Navigation Results" style="width: 90%; height: auto;">
+                <br>
+            </div>
+            <ul>
+                <li><strong>Baselines Struggle to Scale:</strong> As the maze complexity increased (medium → giant), most baseline methods failed completely, with success rates dropping to 0% in the largest "giant" maze.</li>
+                <li><strong>C-MCTD Shows Superior Scalability:</strong> In contrast, our C-MCTD variants, especially the <strong>Preplan Composer, achieved a perfect 100% success rate on the most difficult PointMaze-Giant task</strong>, demonstrating outstanding scalability.</li>
+                <li><strong>Efficiency Gains:</strong> The <strong>Preplan Composer was also the fastest planner in C-MCTD and produced the highest-quality (shortest) paths</strong>, clearly showing the benefits of its offline pre-planning strategy.</li>
+            </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -450,7 +429,12 @@
         <h2 class="title is-3">Conclusion</h2>
         <div class="content has-text-justified">
           <p>
-            We introduced Fast Monte Carlo Tree Diffusion (Fast-MCTD), a scalable diffusion-based planning algorithm that resolves the planning horizon dilemma inherent to MCTD. By combining parallelized tree search (P-MCTD) with sparse sub-trajectory abstraction (S-MCTD), Fast-MCTD achieves significant inference-time speedups—up to 100× faster than MCTD in some tasks, while maintaining or exceeding performance across challenging long-horizon tasks. We demonstrated its effectiveness in maze navigation, robotic manipulation, and visual planning benchmarks. These gains are enabled by algorithmic innovations such as search-aware parallel rollouts and coarse-to-fine diffusion over abstract plans. While Fast-MCTD alleviates core efficiency bottlenecks, further improvements may be possible by integrating adaptive sparsity or learning-based guidance selection. Our findings highlight that structured reasoning from test-time scalability and efficient inference process are not mutually exclusive, opening new avenues for fast, deliberative decision-making in high-dimensional domains.
+            We introduced Compositional Monte Carlo Tree Diffusion (C-MCTD), a novel framework that scales diffusion-based planners to generate complex, long-horizon plans by composing shorter trajectories at inference time.
+            C-MCTD integrates three complementary approaches: the <strong>Online Composer</strong> for flexible, on-the-fly plan generation; the <strong>Distributed Composer</strong> for scaling through parallelism; and the <strong>Preplan Composer</strong> for maximum efficiency via pre-computed plan graphs.
+            Our extensive evaluations show that this compositional framework significantly outperforms conventional replanning strategies.
+            Notably, the <strong>Preplan Composer</strong> solves tasks requiring trajectories up to $10\times$ longer than those seen during training.
+            These results demonstrate that compositional scaling at inference time can dramatically enhance the reasoning capabilities of diffusion planners.
+            Crucially, this is achieved without any model retraining, offering a practical and effective path toward more capable agents for challenging sequential decision-making problems.
           </p>
         </div>
       </div>
@@ -464,10 +448,10 @@
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>
-        @article{yoon2025fast,
-          title={Fast Monte Carlo Tree Diffusion: 100x Speedup via Parallel Sparse Planning},
-          author={Yoon, Jaesik and Cho, Hyeonseo and Bengio, Yoshua and Ahn, Sungjin},
-          journal={arXiv preprint arXiv:2506.09498},
+        @article{yoon2025compositional,
+          title={Compositional Monte Carlo Tree Diffusion for Extendable Planning},
+          author={Yoon, Jaesik and Cho, Hyeonseo and Ahn, Sungjin},
+          journal={arXiv preprint arXiv:2510.21361},
           year={2025}
         }
       </code></pre>
