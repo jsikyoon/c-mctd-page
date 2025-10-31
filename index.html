@@ -326,11 +326,23 @@
             <strong>Strategic Tree Connection</strong><br>
             To connect the parallel searches, DC uses a strategy to connect the trees only when the plan from one tree reaches the starting point of another tree.
             This transforms the problem into building a "roadmap" between key waypoints, dramatically reducing computational overhead.
-            $$
+            <!--$$
             \begin{align}
               \text{Connect}(\mathcal{T}_i, \mathcal{T}_j) = 
               \begin{cases}
                   \text{True}, & \text{if } \exists~v \in \mathcal{T}_i : \min_{p \in v.\text{trajectory}} \text{dist}(p, s_j) < \epsilon \\
+                  \text{False}, & \text{otherwise}
+              \end{cases}
+            \end{align}
+            $$-->
+            $$
+            \begin{align}
+              \text{Connect}(\mathcal{T}_i, \mathcal{T}_j) = 
+              \begin{cases}
+                  \text{True}, & \begin{aligned}[t]
+                                  &\text{if } \exists~v \in \mathcal{T}_i : \\
+                                  &\min_{p \in v.\text{trajectory}} \text{dist}(p, s_j) < \epsilon
+                                \end{aligned} \\
                   \text{False}, & \text{otherwise}
               \end{cases}
             \end{align}
