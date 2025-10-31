@@ -220,7 +220,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Compositional Monte Carlo Tree Diffusion (C-MCTD)</h2>
+        <h2 class="title is-3">Compositional Monte Carlo Tree Diffusion</h2>
         <div class="content has-text-justified">
           <p>
             While MCTD performs impressively on complex planning tasks, it struggles to generate plans that are longer than the trajectories seen during training.
@@ -241,54 +241,60 @@
             <li><strong>Preplan Composer (PC):</strong> Achieves maximum efficiency by using a pre-computed "roadmap" of key waypoints to quickly find the optimal path in a graph-based manner.</li>
           </ul>
         </div>
-        <h3 class="title is-4">Parallel MCTD</h3>
+        <!-- Online Composer -->
+        <h3 class="title is-4">Online Composer (OC)</h3>
         <div class="content has-text-justified">
           <p>
             <div style="text-align: center;">
-              <img src="static/images/pmctd_overview.png" alt="PMCTD Overview" style="width: 90%; height: auto;">
+              <img src="static/images/online_composer_overview.png" alt="Online Composer Overview" style="width: 90%; height: auto;">
             </div>
             <br>
-            To design a parallelized version of MCTD, we apply three techniques: Delayed Tree Update, Redundancy-Aware Selection, and Parallel Denoising on Expansion and Simulation.
-            <strong>Delayed Tree Update</strong> postpones tree updates until $K$ rollouts complete, enabling parallel processing of multiple rollouts. While this causes inefficiency from operating on outdated tree statistics, we empirically find this overhead negligible compared to denoising costs. However, delayed updates alone are insufficient for efficient parallelization due to potential duplicate rollouts.
-            <strong>Redundancy-Aware Selection</strong> addresses duplicate rollouts by redesigning the node selection policy to account for concurrent rollouts, inspired by <a href="https://arxiv.org/abs/1810.11755" target="_blank" style="color: #00A1D6; text-decoration: none;">Liu et al., 2018</a> and <a href="https://dke.maastrichtuniversity.nl/m.winands/documents/multithreadedMCTS2.pdf" target="_blank" style="color: #00A1D6; text-decoration: none;">Chaslot et al., 2008</a>:
-            $$
-              \pi(i) = \arg\max_{j\in\mathcal{C}(i)}\left(V_j + \beta \sqrt{ \frac{\log (N_i + \hat{N}_i \cdot w)}{N_j + \hat{N}_j \cdot w}}\right),
-            $$
-            where $\pi(i)$ denotes the node selection policy from node $i$, $\mathcal{C}(i)$ is the child node set, and $V_{i}$, $N_{i}$ represent estimated value and visitation count respectively. The hyperparameter $w$ balances exploration-exploitation for parallel search: $w=0$ reduces to standard MCTD selection, while higher values penalize already-selected nodes in the current batch, encouraging exploration of different tree regions.
-            Additionally, we designed to process the selection sequentially to reduce the possibility of the duplicate rollout.
-            <strong>Parallel Denoising on Expansion and Simulation</strong> optimizes computational overhead. Unlike standard MCTS, MCTD incurs substantial expansion overhead due to denoising processes. We parallelize denoising by batching rollouts—since subplan lengths vary across rollouts, subplans are zero-padded and packed into single batches, enabling high-throughput parallel GPU execution. The table below shows operation times for each MCTD step on PointMaze Giant tasks.
-            <div style="width: 100%; display: flex; justify-content: center; margin: 1em 0;">
-              <table style="border-collapse: collapse; min-width: 320px; max-width: 400px; font-size: 1.1em;">
-                <thead>
-                  <tr>
-                    <th style="border-bottom: 2px solid #222; border-top: 2px solid #222; text-align: left; padding: 6px 12px;">MCTD Step</th>
-                    <th style="border-bottom: 2px solid #222; border-top: 2px solid #222; text-align: left; padding: 6px 12px;">Time (sec.)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;">Selection</td>
-                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;">3e-4 (0.05%)</td>
-                  </tr>
-                  <tr>
-                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;">Expansion</td>
-                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;"><strong>0.393 (70.9%)</strong></td>
-                  </tr>
-                  <tr>
-                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;">Simulation</td>
-                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;"><strong>0.161 (29.0%)</strong></td>
-                  </tr>
-                  <tr>
-                    <td style="border-bottom: 2px solid #222; padding: 6px 12px;">Backpropagation</td>
-                    <td style="border-bottom: 2px solid #222; padding: 6px 12px;">1e-4 (0.02%)</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
           </p>
-          <br>
-          <br>
-        </div>
+          <p>
+            The Online Composer (OC) is our foundational approach to solving the myopic planning problem.
+            Instead of simply reacting when a plan ends, OC systematically builds a long-term plan by connecting shorter, high-quality plan segments within a single, coherent tree search.
+            This is achieved through three key components.
+          </p>
+          <p>
+            <strong>Stitching-Based Tree Expansion</strong><br>
+            To create a plan-level search tree, OC's nodes represent <em>entire, complete plans</em> rather than just partial steps.
+            When the tree expands, OC generates a new plan segment $\mathbf{x}^m$ and <strong>stitches</strong> it to the end of the parent node's plan $\mathbf{x}^{1:m-1}$.
+            This allows us to construct trajectories that are far longer than the base diffusion planner was trained on, all while using the power of tree search to find a globally optimal solution.
+            $$
+              \begin{align}
+                p_\theta(\mathbf{x}) \approx \prod_{m=1}^{M} p_\theta(\mathbf{x}^m \mid \mathbf{x}^{1:m-1})
+              \end{align}
+            $$
+          </p>
+          <p>
+            <strong>Guidance Sets as Meta-Actions</strong><br>
+            To improve decision-making, we generalize MCTD's "guidance level" into a <strong>guidance set</strong>.
+            At each expansion step, instead of committing to a single guidance strategy (e.g., be conservative or be exploratory), OC considers a flexible set of options.
+            This empowers the planner at inference time to select the most effective guidance for generating the next plan segment, leading to more diverse and higher-quality solutions.
+            $$
+              \begin{align}
+                p(\mathbf{x}|\mathcal{G}) \approx \prod_{m=1}^M p(\mathbf{x}^m|\mathbf{x}^{1:m-1}, \mathcal{G}^m)
+              \end{align}
+            $$
+          </p>
+          <p>
+            <strong>Fast Replanning for Simulation</strong><br>
+            To keep the search process efficient, OC needs to quickly evaluate the potential of a partial plan.
+            Inspired by "jumpy denoising," it uses <strong>fast replanning</strong>.
+            Once a new plan segment is added, the remainder of the trajectory is rapidly generated using an accelerated denoising process.
+            This provides a fast, approximate preview of the final outcome, allowing the search algorithm to evaluate rewards without performing a full, computationally expensive simulation.
+            $$
+              \begin{align}
+                \tilde{\mathbf{x}}^{m+1:M} \sim p(\mathbf{x}^{m+1:M}|\mathbf{x}^{1:m}, \mathcal{G}^m)
+              \end{align}
+            $$
+          </p>
+          <p>
+            <strong>Limitations and the Next Step</strong><br>
+            While OC effectively extends planning beyond the limits of its training data, its sequential, piece-by-piece approach can become slow in extremely large environments due to the exponential growth of the search space.
+            To address these scalability challenges, we developed our next two variants: <strong>Distributed Composer (DC)</strong> and <strong>Preplan Composer (PC)</strong>.
+          </p>
+        <!-- Distributed Composer -->
         <h3 class="title is-4">Sparse MCTD</h3>
         <div class="content has-text-justified">
           <p>
