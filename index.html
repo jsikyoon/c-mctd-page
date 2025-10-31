@@ -415,6 +415,34 @@
                 <li><strong>Efficiency Gains:</strong> The <em>Preplan Composer</em> was also the fastest planner in C-MCTD and produced the highest-quality (shortest) paths, clearly showing the benefits of its offline pre-planning strategy.</li>
             </ul>
         </div>
+        <h3 class="title is-4">Multi-Object Manipulation 🤖</h3>
+        <div class="content has-text-justified">
+            <p>
+                Next, we evaluated C-MCTD on a robotic arm manipulation task requiring it to stack multiple cubes in a specific order, a test of precise sequential planning.
+            </p>
+        
+            <div class="has-text-centered">
+              <img src="static/images/multi_object_manipulation_results.png" alt="Multi-Object Manipulation Results" style="width: 90%; height: auto;">
+            </div>
+            <ul>
+                <li><strong>Baselines Degrade with Complexity:</strong> As the number of cubes increased, the success rates of baseline methods dropped significantly (e.g., MCTD-Replan fell from 100% to 24%).</li>
+                <li><strong>C-MCTD Excels at Compositional Reasoning:</strong> Our <em>Online Composer</em>, enhanced with a Plan Cache (to avoid re-planning the same plan multiple times), maintained a high 82% success rate on the most difficult four-cube task, proving its ability to solve complex compositional problems.</li>
+            </ul>
+        </div>
+        <h3 class="title is-4">High-Dimensional Visual Navigation 👀</h3>
+        <div class="content has-text-justified">
+            <p>
+                Finally, we applied C-MCTD to a challenging visual navigation task where the agent must find its way from raw RGB image observations. This partially observable setting mimics real-world scenarios.
+            </p>
+            <div class="has-text-centered">
+              <img src="static/images/high_dimensional_visual_navigation_results.png" alt="High-Dimensional Visual Navigation Results" style="width: 90%; height: auto;">
+            </div>
+            <ul>
+                <li><strong>Myopic Planning Fails:</strong> In this difficult setting, the limitations of myopic (short-sighted) planning were clear, with baselines performing very poorly on the more complex maze.</li>
+                <li><strong>C-MCTD's Plan-Level Search Succeeds:</strong> Our <em>Online Composer</em> significantly outperformed all baselines, achieving a 54% success rate on the large maze (vs. 20% for the best baseline), highlighting the benefit of reasoning over the entire plan.</li>
+                <li><strong>Future Research Direction:</strong> Interestingly, the <em></em>Distributed Composer</em> and <em>Preplan Composer</em> variants underperformed here. This suggests that identifying meaningful waypoints in high-dimensional visual space is a key challenge and an important direction for future work.</li>
+            </ul>
+        </div>
       </div>
     </div>
   </div>
