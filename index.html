@@ -1,336 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Primary Meta Tags -->
-  <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="PAPER_TITLE - AUTHOR_NAMES">
-  <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="KEYWORD1, KEYWORD2, KEYWORD3, machine learning, computer vision, AI">
-  <!-- TODO: List all authors -->
-  <meta name="author" content="FIRST_AUTHOR_NAME, SECOND_AUTHOR_NAME">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="article">
-  <!-- TODO: Replace with your institution or lab name -->
-  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
-  <!-- TODO: Same as paper title above -->
-  <meta property="og:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Replace with your actual website URL -->
-  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
-  <!-- TODO: Create a 1200x630px preview image and update path -->
-  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
-  <meta property="article:author" content="FIRST_AUTHOR_NAME">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KEYWORD1">
-  <meta property="article:tag" content="KEYWORD2">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
 
-  <!-- Twitter -->
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_banner_image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- TODO: Replace with your lab/institution Twitter handle -->
-  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-  <!-- TODO: Replace with first author's Twitter handle -->
-  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
-  <!-- TODO: Same as paper title above -->
-  <meta name="twitter:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Same as social preview image above -->
-  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
-
-  <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="PAPER_TITLE">
-  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
-  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
-  <meta name="citation_publication_date" content="2024">
-  <meta name="citation_conference_title" content="CONFERENCE_NAME">
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
-  <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <!-- TODO: Replace with your paper title and authors -->
-  <title>PAPER_TITLE - AUTHOR_NAMES | Academic Research</title>
-  
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
-  
-  <!-- Critical CSS - Load synchronously -->
+  <title>C-MCTD</title>
+  <link rel="icon" type="image/x-icon" href="static/images/mctd.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
   <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  
-  <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- Fallback for browsers that don't support preload -->
-  <noscript>
-    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  </noscript>
-  
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Defer non-critical JavaScript -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
-  <script defer src="static/js/bulma-slider.min.js"></script>
-  <script defer src="static/js/index.js"></script>
-  
-  <!-- Structured Data for Academic Papers -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    "headline": "PAPER_TITLE",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
-    "author": [
-      {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      }
-    ],
-    "datePublished": "2024-01-01",
-    "publisher": {
-      "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
-    },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
-    "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
-    },
-    "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
-  }
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
-  
-  <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
-    ]
-  }
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      }
+    };
   </script>
 </head>
 <body>
 
 
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
-
-  <!-- More Works Dropdown -->
-  <div class="more-works-container">
-    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
-      <i class="fas fa-flask"></i>
-      More Works
-      <i class="fas fa-chevron-down dropdown-arrow"></i>
-    </button>
-    <div class="more-works-dropdown" id="moreWorksDropdown">
-      <div class="dropdown-header">
-        <h4>More Works from Our Lab</h4>
-        <button class="close-btn" onclick="toggleMoreWorks()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="works-list">
-        <!-- TODO: Replace with your lab's related works -->
-        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
-          <div class="work-info">
-            <!-- TODO: Replace with actual paper title -->
-            <h5>Paper Title 1</h5>
-            <!-- TODO: Replace with brief description -->
-            <p>Brief description of the work and its main contribution.</p>
-            <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2024</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <!-- TODO: Add more related works or remove extra items -->
-        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 2</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 3</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <main id="main-content">
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
+            <h1 class="title is-1 publication-title">Fast Monte Carlo Tree Diffusion: 100x Speedup via Parallel Sparse Planning</h1>
             <div class="is-size-5 publication-authors">
-              <!-- TODO: Replace with your paper authors and their personal links -->
+              <!-- Paper authors -->
               <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
-                  </span>
-                  </div>
+                <a href="https://jaesikyoon.com" target="_blank">Jaesik Yoon</a><sup>1,2</sup>,
+              </span>
+              <span class="author-block">
+                Hyeonseo Cho<sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://mlml.kaist.ac.kr/sungjinahn" target="_blank">Sungjin Ahn</a><sup>1,3</sup>
+              </span>
+              </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Institution Name<br>Conference name and year</span>
-                    <!-- TODO: Remove this line if no equal contribution -->
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"><sup>1</sup>KAIST, <sup>2</sup>SAP, <sup>3</sup>NYU
+                  <br>NeurIPS 2025, <span style="color: #8FBC8F; font-style: italic;">Spotlight (top 3.2% of submissions)</span>
+                </span>
+                </span>
+              </div>
 
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- TODO: Update with your arXiv paper ID -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- Arxiv PDF link -->
+                  <span class="link-block">
+                    <a href="https://arxiv.org/pdf/2510.21361" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
                     </span>
-
-                    <!-- TODO: Add your supplementary material PDF or remove this section -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
+                    <span>Paper</span>
                     </a>
                   </span>
 
-                  <!-- TODO: Replace with your GitHub repository URL -->
+                  <!-- ArXiv abstract Link -->
                   <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                    <a href="https://arxiv.org/abs/2510.21361" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
-                      <i class="fab fa-github"></i>
+                      <i class="ai ai-arxiv"></i>
                     </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- TODO: Update with your arXiv paper ID -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
+                    <span>arXiv</span>
+                    </a>
                   </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-            </div>
-          </div>
+
+                  <!-- Arxiv PDF link -->
+                  <span class="link-block">
+                    <a href="https://arxiv.org/pdf/2502.07202" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>MCTD Paper</span>
+                    </a>
+                  </span>
+
         </div>
       </div>
     </div>
   </div>
+</div>
 </section>
 
 
-<!-- Teaser video-->
+<!-- Teaser image-->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/banner_video.mp4" type="video/mp4">
-      </video>
-      <!-- TODO: Replace with your video description -->
+      <div class="banner-videos" style="display: flex; gap: 16px; justify-content: center; align-items: center;">
+        <img src="static/images/c_mctd_maze_illustration.png" alt="Key Result" style="max-width: 100%; height: auto;">
+      </div>
       <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+        Monte Carlo Tree Diffusion (MCTD) shows promising results in the complex planning tasks by integrating diffusion models with structured tree search.
+        However, its efficacy is limited by the training trajectory lengths due to the limitation of diffusion model's ability to generate longer trajectories than the training data.
+        We propose Compositional Monte Carlo Tree Diffusion (C-MCTD), a framework that compositionally generates plans from individual trajectory generation with global coherence.
       </h2>
     </div>
   </div>
 </section>
-<!-- End teaser video -->
+<!-- End teaser image -->
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -339,9 +152,8 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          <!-- TODO: Replace with your paper abstract -->
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+            Diffusion models have recently emerged as a powerful approach for trajectory planning. However, their inherently non-sequential nature limits their effectiveness in long-horizon reasoning tasks at test time. The recently proposed Monte Carlo Tree Diffusion (MCTD) offers a promising solution by combining diffusion with tree-based search, achieving state-of-the-art performance on complex planning problems. Despite its strengths, our analysis shows that MCTD incurs substantial computational overhead due to the sequential nature of tree search and the cost of iterative denoising. To address this, we propose Fast-MCTD, a more efficient variant that preserves the strengths of MCTD while significantly improving its speed and scalability. Fast-MCTD integrates two techniques: Parallel MCTD, which enables parallel rollouts via delayed tree updates and redundancy-aware selection; and Sparse MCTD, which reduces rollout length through trajectory coarsening. Experiments show that Fast-MCTD achieves up to 100× speedup over standard MCTD while maintaining or improving planning performance. Remarkably, it even outperforms Diffuser in inference speed on some tasks, despite Diffuser requiring no search and yielding weaker solutions. These results position Fast-MCTD as a practical and scalable solution for diffusion-based inference-time reasoning.
           </p>
         </div>
       </div>
@@ -350,143 +162,201 @@
 </section>
 <!-- End paper abstract -->
 
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
+<!-- planning horizon dilemma -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Planning Horizon Dilemma</h2>
+        <div class="content has-text-justified">
+          <p>
+            MCTD shows promising results in complex planning tasks by combining tree-structured search (Monte Carlo Tree Search) with diffusion denoising. However, it suffers from inherent computational inefficiency due to the intensive nature of both components.
+            The computational bottlenecks arise from two sources: MCTS fundamentally requires sequential statistics updates after each rollout, preventing parallelization, while the diffusion model demands iterative execution of expensive denoising steps at each node.
+            This overhead becomes particularly problematic in long-horizon tasks—precisely where MCTD excels. As planning horizon increases, MCTD must navigate exponentially expanding search space, leading to prohibitive computational costs.
+            Consider an MCTD tree where each parent has $N_{\text{child}}$ children and $C_{\text{sub}}$ represents the denoising cost per node. For required task depth $\bar{s}$, the total search complexity is:
+            $$
+            C_{\text{MCTD}} = O(N_{\text{child}}^{\bar{s}} \cdot C_{\text{sub}}).
+            $$
+            While MCTD's exploration-exploitation balancing reduces actual complexity below this bound, the algorithm remains exponential in planning horizon. This creates the <strong>Planning Horizon Dilemma</strong>: MCTD becomes increasingly inefficient precisely where it is most effective—long-horizon planning tasks requiring extensive search depth.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End youtube video -->
+<!-- End planning horizon dilemma -->
 
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
+<!-- Fast-MCTD -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Fast-MCTD: Fast Monte Carlo Tree Diffusion</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this work, we addressed the efficiency issue of MCTD in the two aspects: <strong>Between-rollout inefficiency</strong> and <strong>Within-rollout inefficiency</strong>.
+            The inefficiency between rollout is from the sequential statistics updates of MCTS, limiting parallelism, we addressed this by re-designing the MCTD tree search to be parallelizable with Parallel MCTD (P-MCTD).
+            The inefficiency within rollout is from the iterative denoising process of diffusion model, which is computationally intensive. To optimize the within-rollout inefficiency, we proposed the higher-level planning, Sparse MCTD (S-MCTD).
+            <br>
+            <br>
+          </p>
         </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
+        <h3 class="title is-4">Parallel MCTD</h3>
+        <div class="content has-text-justified">
+          <p>
+            <div style="text-align: center;">
+              <img src="static/images/pmctd_overview.png" alt="PMCTD Overview" style="width: 90%; height: auto;">
+            </div>
+            <br>
+            To design a parallelized version of MCTD, we apply three techniques: Delayed Tree Update, Redundancy-Aware Selection, and Parallel Denoising on Expansion and Simulation.
+            <strong>Delayed Tree Update</strong> postpones tree updates until $K$ rollouts complete, enabling parallel processing of multiple rollouts. While this causes inefficiency from operating on outdated tree statistics, we empirically find this overhead negligible compared to denoising costs. However, delayed updates alone are insufficient for efficient parallelization due to potential duplicate rollouts.
+            <strong>Redundancy-Aware Selection</strong> addresses duplicate rollouts by redesigning the node selection policy to account for concurrent rollouts, inspired by <a href="https://arxiv.org/abs/1810.11755" target="_blank" style="color: #00A1D6; text-decoration: none;">Liu et al., 2018</a> and <a href="https://dke.maastrichtuniversity.nl/m.winands/documents/multithreadedMCTS2.pdf" target="_blank" style="color: #00A1D6; text-decoration: none;">Chaslot et al., 2008</a>:
+            $$
+              \pi(i) = \arg\max_{j\in\mathcal{C}(i)}\left(V_j + \beta \sqrt{ \frac{\log (N_i + \hat{N}_i \cdot w)}{N_j + \hat{N}_j \cdot w}}\right),
+            $$
+            where $\pi(i)$ denotes the node selection policy from node $i$, $\mathcal{C}(i)$ is the child node set, and $V_{i}$, $N_{i}$ represent estimated value and visitation count respectively. The hyperparameter $w$ balances exploration-exploitation for parallel search: $w=0$ reduces to standard MCTD selection, while higher values penalize already-selected nodes in the current batch, encouraging exploration of different tree regions.
+            Additionally, we designed to process the selection sequentially to reduce the possibility of the duplicate rollout.
+            <strong>Parallel Denoising on Expansion and Simulation</strong> optimizes computational overhead. Unlike standard MCTS, MCTD incurs substantial expansion overhead due to denoising processes. We parallelize denoising by batching rollouts—since subplan lengths vary across rollouts, subplans are zero-padded and packed into single batches, enabling high-throughput parallel GPU execution. The table below shows operation times for each MCTD step on PointMaze Giant tasks.
+            <div style="width: 100%; display: flex; justify-content: center; margin: 1em 0;">
+              <table style="border-collapse: collapse; min-width: 320px; max-width: 400px; font-size: 1.1em;">
+                <thead>
+                  <tr>
+                    <th style="border-bottom: 2px solid #222; border-top: 2px solid #222; text-align: left; padding: 6px 12px;">MCTD Step</th>
+                    <th style="border-bottom: 2px solid #222; border-top: 2px solid #222; text-align: left; padding: 6px 12px;">Time (sec.)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;">Selection</td>
+                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;">3e-4 (0.05%)</td>
+                  </tr>
+                  <tr>
+                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;">Expansion</td>
+                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;"><strong>0.393 (70.9%)</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;">Simulation</td>
+                    <td style="border-bottom: 1px solid #222; padding: 6px 12px;"><strong>0.161 (29.0%)</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="border-bottom: 2px solid #222; padding: 6px 12px;">Backpropagation</td>
+                    <td style="border-bottom: 2px solid #222; padding: 6px 12px;">1e-4 (0.02%)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </p>
+          <br>
+          <br>
         </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
+        <h3 class="title is-4">Sparse MCTD</h3>
+        <div class="content has-text-justified">
+          <p>
+            <div style="text-align: center;">
+              <img src="static/images/smctd_overview.png" alt="Sparse MCTD Overview" style="width: 90%; height: auto;">
+            </div>
+            <br>
+            Through the parallelization of the tree search, we can optimize the overhead on the sequential search. However, another fundamental inefficiency of MCTD is the iterative denoising process of diffusion model, which is computationally intensive.
+            To address this, we proposed the Sparse MCTD (S-MCTD), which reduces the rollout length through trajectory coarsening, $\mathbf{x}'=[x_1, x_{H+1}, x_{2H+1}, $$\dots]$ where $H$ is the coarsening factor.
+            Similar to the parallelism degree, too much coarsening can cause the information loss, we empirically found the optimal coarsening factor $H=5$.
+            Interestingly, this coarsening process is not just improving the efficiency on denoising, but also reducing the search space by reducing the number of subplans as:
+            $$
+            C_{\text{S-MCTD}} = \mathcal{O}\left(N_{\text{child}}^{S/H} \cdot C_{\text{coarse}}\right),
+            $$
+            where $C_{\text{coarse}}$ is the denoising cost of the coarse trajectory.
+            We observe that computational efficiency improves exponentially with the interval size $H$.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End video carousel -->
+<!-- End Fast-MCTD -->
 
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
+<!-- Experiment results -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experimental Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            We evaluate the performance of Fast-MCTD on a variety of tasks, including long-horizon maze, robot arm manipulation, and partially observable & visual long-horizon maze tasks.
+            While MCTD shows better performance than other baselines, the required time to generate plans from MCTD is generally much longer than other baselines.
+            On the other hand, Fast-MCTD shows comparable performances to MCTD while achieving huge speedups.
+            For instance, for PointMaze and AntMaze Giant tasks, Fast-MCTD achieves 100x and 80x speedup over MCTD while maintaining the similar performance.
+            <br>
+            <br>
+            Especially, on Visual Maze large tasks, Fast-MCTD outperforms MCTD through the higher-level planning by improving the long-term planning generation quality.
+            <br>
+            <br>
+            <img src="static/images/maze-results.png" alt="Experiment Results" style="width: 100%; height: auto;">
+            <br>
+            <img src="static/images/cube-results.png" alt="Experiment Results" style="width: 100%; height: auto;">
+            <br>
+            <img src="static/images/vmaze-results.png" alt="Experiment Results" style="width: 100%; height: auto;">
+            <br>
+          </p>
+        </div>
+        <h3 class="title is-4">Ablation Study</h3>
+        <div class="content has-text-justified">
+          <p>
+            We conducted an ablation study to understand the contribution of each component of Fast-MCTD.
+            <br>
+            <br>
+            <figure style="text-align: center;">
+              <img src="static/images/ras_ablation.png" alt="Ablation Study" style="width: 100%; height: auto;">
+              <figcaption style="margin-top: 8px; font-size: 1em; color: #555;">Ablation Study on Redundancy-Aware Selection</figcaption>
+            </figure>
+            The redundancy awareness (sequential selection) ablation study is shown in Table 5, we can see that the redundancy awareness is important to improve the efficiency on the long-horizon planning tasks.
+            For the hyperparameter $w$ on our modified node selection policy, we found that if $w$ is not $0$ (considering the other concurrent rollouts), it's effect on the model performance is not significant. 
+            <br>
+            <br>
+            <figure style="text-align: center;">
+              <img src="static/images/parallelism_jump_ablation.png" alt="Ablation Study" style="width: 100%; height: auto;">
+              <figcaption style="margin-top: 8px; font-size: 1em; color: #555;">Ablation Study on Parallelism Degree and Higher-Level Interval</figcaption>
+            </figure>
+            We took another ablation studies on the parallelism degree and higher-level abstraction interval.
+            For parallelism degree, we found that the efficiency is dramatically improved when it is increased from $1$.
+            When it is very high (e.g., 200), the performance is slightly degraded, but it is not significant, which means the overhead on searching from the old tree statistics is minor compared to the benefit from the parallelism.
+            For the higher-level abstraction interval, we found the performance is drastically decreased when the interval is too large (e.g., 30), while the efficiency is saturated at 10.
+            It is because the information loss of the coarse trajectory is too large to generate the good subplans.
+          </p>
       </div>
     </div>
-  </section>
-<!--End paper poster -->
+  </div>
+</section>
+<!-- End Experiment results -->
 
-
+<!-- paper conclusion -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Conclusion</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduced Fast Monte Carlo Tree Diffusion (Fast-MCTD), a scalable diffusion-based planning algorithm that resolves the planning horizon dilemma inherent to MCTD. By combining parallelized tree search (P-MCTD) with sparse sub-trajectory abstraction (S-MCTD), Fast-MCTD achieves significant inference-time speedups—up to 100× faster than MCTD in some tasks, while maintaining or exceeding performance across challenging long-horizon tasks. We demonstrated its effectiveness in maze navigation, robotic manipulation, and visual planning benchmarks. These gains are enabled by algorithmic innovations such as search-aware parallel rollouts and coarse-to-fine diffusion over abstract plans. While Fast-MCTD alleviates core efficiency bottlenecks, further improvements may be possible by integrating adaptive sparsity or learning-based guidance selection. Our findings highlight that structured reasoning from test-time scalability and efficient inference process are not mutually exclusive, opening new avenues for fast, deliberative decision-making in high-dimensional domains.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper conclusion -->
 
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
-      <div class="bibtex-header">
-        <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-          <i class="fas fa-copy"></i>
-          <span class="copy-text">Copy</span>
-        </button>
-      </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
-}</code></pre>
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+        @article{yoon2025fast,
+          title={Fast Monte Carlo Tree Diffusion: 100x Speedup via Parallel Sparse Planning},
+          author={Yoon, Jaesik and Cho, Hyeonseo and Bengio, Yoshua and Ahn, Sungjin},
+          journal={arXiv preprint arXiv:2506.09498},
+          year={2025}
+        }
+      </code></pre>
     </div>
 </section>
 <!--End BibTex citation -->
@@ -499,7 +369,7 @@
         <div class="content">
 
           <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
             You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
