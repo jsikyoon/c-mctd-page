@@ -215,20 +215,31 @@
   </div>
 </section>
 
-<!-- Fast-MCTD -->
+<!-- C-MCTD -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Fast-MCTD: Fast Monte Carlo Tree Diffusion</h2>
+        <h2 class="title is-3">Compositional Monte Carlo Tree Diffusion (C-MCTD)</h2>
         <div class="content has-text-justified">
           <p>
-            In this work, we addressed the efficiency issue of MCTD in the two aspects: <strong>Between-rollout inefficiency</strong> and <strong>Within-rollout inefficiency</strong>.
-            The inefficiency between rollout is from the sequential statistics updates of MCTS, limiting parallelism, we addressed this by re-designing the MCTD tree search to be parallelizable with Parallel MCTD (P-MCTD).
-            The inefficiency within rollout is from the iterative denoising process of diffusion model, which is computationally intensive. To optimize the within-rollout inefficiency, we proposed the higher-level planning, Sparse MCTD (S-MCTD).
-            <br>
-            <br>
+            While MCTD performs impressively on complex planning tasks, it struggles to generate plans that are longer than the trajectories seen during training.
+            A common workaround is to simply generate a new plan when the old one ends.
+            However, this "replanning" approach is inherently <strong>myopic</strong>—it makes decisions based only on the immediate situation, often leading to dead ends or inefficient, suboptimal paths.
           </p>
+          <p>
+            To overcome this fundamental limitation, we propose <strong>Compositional Monte Carlo Tree Diffusion (C-MCTD)</strong>.
+            Our framework constructs a globally coherent, long-horizon plan by intelligently <strong>composing</strong> shorter, high-quality plan segments.
+            This allows C-MCTD to reason about the entire problem and avoid the short-sighted pitfalls of simple replanning.
+          </p>
+          <p>
+            We developed three distinct variants of C-MCTD, each designed to tackle different scalability challenges:
+          </p>
+          <ul>
+            <li><strong>Online Composer (OC):</strong> Builds the plan sequentially, using a systematic tree search to ensure each new segment connects coherently with the overall plan.</li>
+            <li><strong>Distributed Composer (DC):</strong> Speeds up the search by expanding the plan from multiple points at once, effectively meeting in the middle.</li>
+            <li><strong>Preplan Composer (PC):</strong> Achieves maximum efficiency by using a pre-computed "roadmap" of key waypoints to quickly find the optimal path in a graph-based manner.</li>
+          </ul>
         </div>
         <h3 class="title is-4">Parallel MCTD</h3>
         <div class="content has-text-justified">
