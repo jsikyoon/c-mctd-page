@@ -751,3 +751,27 @@ a:focus {
 
 
 
+
+/* MathJax responsive rendering */
+mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  margin: 1rem 0;
+}
+
+@media screen and (max-width: 768px) {
+  mjx-container[jax="CHTML"][display="true"] {
+    font-size: 0.95em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  mjx-container[jax="CHTML"][display="true"] {
+    font-size: 0.9em;
+  }
+}
